@@ -8,10 +8,12 @@ Vagrant.configure("2") do |config|
     config.vm.define "frontend" do |frontend|
     frontend.vm.hostname = "frontend"
     
+    
     # Create a forwarded port mapping which allows access to a specific port
     # within the machine from a port on the host machine and only allow access
     # via 127.0.0.1 to disable public access
     frontend.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+    
 
     # this address is for communicating between VMs
     frontend.vm.network "private_network", ip: "192.168.56.11"
@@ -25,6 +27,20 @@ Vagrant.configure("2") do |config|
       sudo systemctl reload apache2
     SHELL
   end
+
+    config.vm.define "database" do |database|
+    database.vm.hostname = "database"
+    
+    # this address is for communicating between VMs
+    database.vm.network "private_network", ip: "192.168.56.12"
+
+    database.vm.provision "shell", path: "database-setup.sh"
+
+    end
+
+
+
+
 end
 
 
