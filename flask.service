@@ -1,0 +1,12 @@
+[Unit]
+Description=Run flask on start up
+After=network.target
+
+[Service]
+User=vagrant
+WorkingDirectory=/vagrant/backend
+ExecStart=/usr/bin/python3 /vagrant/backend/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

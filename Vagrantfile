@@ -35,8 +35,15 @@ Vagrant.configure("2") do |config|
     database.vm.network "private_network", ip: "192.168.56.12"
 
     database.vm.provision "shell", path: "database-setup.sh"
-
     end
+
+  config.vm.define "backend" do |backend|
+  backend.vm.hostname = "backend"
+
+  backend.vm.network "private_network", ip: "192.168.56.13"
+
+  backend.vm.provision "shell", path: "backend-setup.sh"
+  end
 
 
 

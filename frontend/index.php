@@ -1,23 +1,22 @@
 <?php
-$servername = "192.168.56.12"; 
-$username = "webuser";
-$password = "placeholder_password";
-$dbname = "ironsand";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// backend VM endpoint
+$url = "http://192.168.56.13:5000/deposits";
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// json from backend/main.py
+$json_data = file_get_contents($url);
+$json_data = @file_get_contents($url);
+
+if ($json_data === false) {
+    die("Could not fetch deposits from backend.");
 }
-echo "Connection established successfully";
 
+$deposits = json_decode($json_data, true);
 
-// Query the deposits table
-$sql = "SELECT name, rock_type, latitude, longitude, description FROM DEPOSIT";
-$result = $conn->query($sql);
+if ($deposits === null) {
+    die("JSON decode error: " . json_last_error_msg());
+}
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -35,16 +34,20 @@ $result = $conn->query($sql);
         <a href="view_deposit.html">View Deposit</a>
     </nav>
     <ul>
-        <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<li><b>".$row['name']."</b> (".$row['rock_type'].") - ".$row['description']."</li>";
-                }
-            } else {
-                echo "<li>No deposits found.</li>";
-            }
-            $conn->close();
-        ?>
+   <h1>Deposits</h1>
+    <?php if (!empty($deposits)): ?>
+        <ul>
+            <?php foreach ($deposits as $deposit): ?>
+                <li>
+                    <strong>Name:</strong> <?php echo htmlspecialchars($deposit['name']); ?><br>
+                    <strong>Rock Type:</strong> <?php echo htmlspecialchars($deposit['rock_type']); ?><br>
+                    <strong>Description:</strong> <?php echo htmlspecialchars($deposit['description']); ?><br>
+                    <strong>Location:</strong> <?php echo $deposit['latitude'] . ", " . $deposit['longitude']; ?><br>
+                    <strong>Date Discovered:</strong> <?php echo $deposit['date_discovered']; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
 </ul>
     
 </body>
