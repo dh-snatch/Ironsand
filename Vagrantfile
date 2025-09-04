@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 
     frontend.vm.provision "shell", inline: <<-SHELL
       sudo apt-get update
-      sudo apt-get install -y apache2
+      sudo apt-get install -y apache2 php libapache2-mod-php php-mysql
       sudo cp /vagrant/website.conf /etc/apache2/sites-available/
       sudo a2ensite website.conf
       sudo a2dissite 000-default

@@ -15,8 +15,8 @@ apt-get -y install mysql-server
 service mysql start
 
 # Create database called ironsand and a user called webuser with all privileges on the database
-echo "CREATE DATABASE ironsand;" | mysql
-echo "CREATE USER 'webuser'@'%' IDENTIFIED BY 'placeholder_password';" | mysql
+echo "CREATE DATABASE IF NOT EXISTS ironsand;" | mysql
+echo "CREATE USER IF NOT EXISTS 'webuser'@'%' IDENTIFIED BY 'placeholder_password';" | mysql
 echo "GRANT ALL PRIVILEGES ON ironsand.* TO 'webuser'@'%'" | mysql
 
 export MYSQL_PWD='placeholder_password'
