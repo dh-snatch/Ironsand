@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#map { 
+    height: 800px;
+
+}
+
+#sidebar {
+    width: 25%;
+    float: left;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+header, nav {
+    padding: 0.5em;
+    color: rgb(255, 255, 255);
+    background-color: rgb(122, 120, 120);
+}
+
+a {
+    margin-right: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+ul {
+    padding: 10px;
+}
+li {
+    margin-bottom: 5px;
+}

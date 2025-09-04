@@ -1,0 +1,21 @@
+<?php
+
+// backend VM endpoint
+$url = "http://192.168.56.13:5000/deposits";
+
+// json from backend/main.py
+$json_data = @file_get_contents($url);
+
+if ($json_data === false) {
+    die("Could not fetch deposits from backend.");
+}
+
+$deposits = json_decode($json_data, true);
+
+if ($deposits === null) {
+    die("JSON decode error: " . json_last_error_msg());
+}
+
+header('Content-Type: application/json');
+echo json_encode($deposits);
+?>
