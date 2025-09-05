@@ -1,5 +1,11 @@
 # Set-up script adapted from https://altitude.otago.ac.nz/cosc349/vagrant-multivm
 
+
+# replace all instances of http with https in sources.list, http connection was refused
+# or not redirected when connecting to ubuntu repositories
+sudo sed -i 's|http://|https://|g' /etc/apt/sources.list
+
+
 apt-get update
       
 # Placeholder password

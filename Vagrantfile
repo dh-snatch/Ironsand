@@ -2,52 +2,31 @@
 Vagrant.configure("2") do |config|
 
 
-
     config.vm.box = "bento/ubuntu-22.04"
-
+    # frontend set up
     config.vm.define "frontend" do |frontend|
     frontend.vm.hostname = "frontend"
     
-    
-    # Create a forwarded port mapping which allows access to a specific port
-    # within the machine from a port on the host machine and only allow access
-    # via 127.0.0.1 to disable public access
+    # Only the frontend VM needs port forwarding , it is the point of entry to the application
     frontend.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
     
-
-    # this address is for communicating between VMs
+    # private network for communication between VMs 192.168.56.x
     frontend.vm.network "private_network", ip: "192.168.56.11"
-
-    frontend.vm.provision "shell", inline: <<-SHELL
-      sudo apt-get update
-      sudo apt-get install -y apache2 php libapache2-mod-php php-mysql
-      sudo cp /vagrant/website.conf /etc/apache2/sites-available/
-      sudo a2ensite website.conf
-      sudo a2dissite 000-default
-      sudo systemctl reload apache2
-    SHELL
-  end
-
+    # link to shell script
+    frontend.vm.provision "shell", path: "frontend-setup.sh"
+    end
+    # database set up
     config.vm.define "database" do |database|
     database.vm.hostname = "database"
-    
-    # this address is for communicating between VMs
     database.vm.network "private_network", ip: "192.168.56.12"
-
     database.vm.provision "shell", path: "database-setup.sh"
     end
-
-  config.vm.define "backend" do |backend|
-  backend.vm.hostname = "backend"
-
-  backend.vm.network "private_network", ip: "192.168.56.13"
-
-  backend.vm.provision "shell", path: "backend-setup.sh"
-  end
-
-
-
-
+    # backend set up
+    config.vm.define "backend" do |backend|
+    backend.vm.hostname = "backend"
+    backend.vm.network "private_network", ip: "192.168.56.13"
+    backend.vm.provision "shell", path: "backend-setup.sh"
+    end
 end
 
 

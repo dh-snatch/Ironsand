@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# replace all instances of http with https in sources.list, http connection was refused
+# or not redirected when connecting to ubuntu repositories
+sudo sed -i 's|http://|https://|g' /etc/apt/sources.list
+
 # Update packages
 apt-get update -y
 
@@ -16,5 +20,5 @@ systemctl daemon-reload
 
 systemctl enable flask.service
 
-# Start the service
+# Start the Flask service
 systemctl start flask.service
