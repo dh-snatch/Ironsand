@@ -1,7 +1,7 @@
 <?php
 
 // backend VM endpoint
-$url = "http://192.168.56.13:5000/deposits";
+$url = "http://192.168.56.13:5000/retrieve_deposits";
 
 // json from backend/main.py
 $json_data = @file_get_contents($url);
