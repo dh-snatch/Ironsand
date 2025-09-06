@@ -64,17 +64,24 @@ def insert_sample():
         return jsonify({"error": str(err)}), 500
 
 
-@app.route("/update_deposit", methods=["PUT"])
-def update_deposit():
+@app.route("/update_sample", methods=["PUT"])
+def update_sample():
     db = connect_to_database()
     db.close()
     return "<p>Hello, World!</p>"
 
-@app.route("/delete_deposit", methods=["DELETE"])
+@app.route("/delete_sample", methods=["DELETE"])
 def delete_deposit():
-    db = connect_to_database()
-    db.close()
-    return "<p>Hello, World!</p>"
+    try:
+        db = connect_to_database()
+        cursor = db.cursor()
+        cursor.execute("DELETE FROM SAMPLE WHERE id = %s", (sample_id,))
+        db.commit()
+        cursor.close()
+        db.close()
+        return jsonify({"status": "success", "deleted_id": sample_id})
+    except mysql.connector.Error as err:
+        return jsonify({"status": "error", "error": str(err)}), 500
     
     
 if __name__ == "__main__":

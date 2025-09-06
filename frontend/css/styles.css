@@ -35,3 +35,11 @@ ul {
 li {
     margin-bottom: 5px;
 }
+
+form {
+    padding: 10px
+}
+
+form label, input {
+    margin-bottom: 5px
+}

@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    fetch('endpoint.php').then(response => response.json()).then(samples => {
+    fetch('/php/retrieve_samples.php').then(response => response.json()).then(samples => {
 
     // For reference: https://leafletjs.com/examples/quick-start/
-        
+
 
     // New Zealand bounds
     const nzBounds = [
@@ -49,7 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <li>Longitude: ${sample.longitude}</li>
             <li>Rock Type: ${sample.rock_type}</li>
         </ul>
+        <button class="delete_button">Delete</button>
         `;
+   
+
+
+        li.querySelector(".delete_button").addEventListener("click", () => {
+            // TODO: php file to delete samples
+            sidebarList.removeChild(li)
+        });
 
         // When the name is clicked, set the map view to the marker and open the popup
         li.querySelector(".clickable-name").addEventListener('click', () => {

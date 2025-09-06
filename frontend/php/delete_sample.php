@@ -1,0 +1,1 @@
+$url = "http://192.168.56.13:5000/delete_sample"; // backend VM endpoint
