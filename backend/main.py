@@ -71,17 +71,23 @@ def update_sample():
     return "<p>Hello, World!</p>"
 
 @app.route("/delete_sample", methods=["DELETE"])
-def delete_deposit():
+def delete_sample():
+    data = request.args.get("id")
     try:
         db = connect_to_database()
         cursor = db.cursor()
-        cursor.execute("DELETE FROM SAMPLE WHERE id = %s", (sample_id,))
+        cursor.execute(
+            "DELETE FROM SAMPLE WHERE id = %s",
+            (
+                data,
+            )
+        )
         db.commit()
         cursor.close()
-        db.close()
-        return jsonify({"status": "success", "deleted_id": sample_id})
+        db.close()  
     except mysql.connector.Error as err:
-        return jsonify({"status": "error", "error": str(err)}), 500
+        return jsonify({"error": str(err)}), 500     
+
     
     
 if __name__ == "__main__":

@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // the sidebar list in index.php
     const sidebarList = document.getElementById('sidebar').querySelector('ul');
-
     // for each item in json data from PHP
     samples.forEach(sample => {
         // Add a marker to the map
@@ -53,10 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
    
 
-
         li.querySelector(".delete_button").addEventListener("click", () => {
-            // TODO: php file to delete samples
-            sidebarList.removeChild(li)
+            fetch(`/php/delete_sample.php?id=${sample.id}`, {
+                method: 'DELETE',
+            });
+            sidebarList.removeChild(li); // remove after deletion
         });
 
         // When the name is clicked, set the map view to the marker and open the popup
@@ -70,6 +70,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }).catch(error => {
         console.error('Error fetching samples:', error);
-    }
-    );
+    });
 });

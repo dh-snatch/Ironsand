@@ -22,11 +22,6 @@ $options = [
 
 $context  = stream_context_create($options);
 $result = file_get_contents($url, false, $context);
-
-if ($result === FALSE) {
-    die("Error sending data to backend VM.");
-}
-
 // redirect back to the main page
 header("Location: http://127.0.0.1:8080/");
 
