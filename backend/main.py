@@ -39,7 +39,7 @@ def insert_sample():
     
     try:
         cnx = cnxpool.get_connection()
-        cursor = db.cursor()
+        cursor = cnx.cursor()
         cursor.execute(
             "INSERT INTO SAMPLE (name, latitude, longitude, rock_type, description, date_discovered) "
             "VALUES (%s, %s, %s, %s, %s, %s)",
