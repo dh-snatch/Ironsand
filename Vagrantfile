@@ -3,9 +3,12 @@ Vagrant.configure("2") do |config|
 
 
     config.vm.box = "bento/ubuntu-22.04"
+
+    config.vm.synced_folder ".", "/vagrant"
     # frontend set up
     config.vm.define "frontend" do |frontend|
     frontend.vm.hostname = "frontend"
+
     
     # Only the frontend VM needs port forwarding , it is the point of entry to the application
     frontend.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"

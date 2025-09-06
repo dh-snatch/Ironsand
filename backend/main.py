@@ -21,12 +21,12 @@ def connect_to_database():
 
 
 
-@app.route("/retrieve_deposits")
+@app.route("/retrieve_samples")
 def list_deposits():
     try:
         db = connect_to_database()
         cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM DEPOSIT")
+        cursor.execute("SELECT * FROM SAMPLE")
         rows = cursor.fetchall()
 
         cursor.close()

@@ -14,8 +14,8 @@ apt-get install -y apache2 php libapache2-mod-php php-mysql
 cp /vagrant/website.conf /etc/apache2/sites-available/
 
 # Disable default site and enable frontend site
-a2ensite website
 a2dissite 000-default
+a2ensite website.conf
 
 # Restart Apache to apply changes
 sudo systemctl reload apache2
