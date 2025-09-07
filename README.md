@@ -8,16 +8,16 @@ Ironsand is a virtualised application for recording geological samples and displ
 
 The frontend VM is responsible for serving static HTML, CSS, JS, and PHP files on an apache server. 
 PHP acts as an intermediary between the browser and the backend flask server. All map related code 
-operates in the browser using Leaflet (see )
+operates in the browser using [Leaflet](https://leafletjs.com/).
 
-The backend VM runs a Flask application as an API, and communicates with PHP files on the frontend.  
+The backend VM runs a Flask application as an API for the database, and communicates with PHP files on the frontend.  
 All endpoints currently run on main.py, as the application is fairly limited in scope. 
 
 The database VM is just a MySQL database, with some test data populated and ready to go. Database name, password, and
-user can be changed in the .env file for convenience (add this to gitignore).
+user can be changed in the backend setup file.
 
 Backend-setup, database-setup, and frontend-setup are shell scripts to automate VM processes.
 To have additional python files run in the background, you can create a similar file to flask.service, cp it over to /etc/systemd/system/yourfilename, and start it with systemctl in backend-setup.sh.
 
 Sometimes the VM hangs and won't boot for a while, but opening the machine's GUI in virtual box seems to fix the problem. 
-For now, I have increased the timeout to 5 minutes in the vagrantfile. 
+For now, I have increased the timeout to 5 minutes in the vagrantfile so that the VM doesn't exit prematurely. 
