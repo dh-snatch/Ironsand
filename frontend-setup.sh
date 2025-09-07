@@ -1,4 +1,6 @@
 #!/bin/bash 
+# Set-up script adapted from https://altitude.otago.ac.nz/cosc349/vagrant-multivm
+
    
 
 # replace all instances of http with https in sources.list, http connection was refused

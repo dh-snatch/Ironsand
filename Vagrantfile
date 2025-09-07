@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
 
 
     config.vm.box = "bento/ubuntu-22.04"
-
+    config.vm.boot_timeout = 300
     config.vm.synced_folder ".", "/vagrant"
     # frontend set up
     config.vm.define "frontend" do |frontend|

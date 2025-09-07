@@ -61,9 +61,7 @@ def insert_sample():
 
 @app.route("/update_sample", methods=["PUT"])
 def update_sample():
-    cnx = cnxpool.get_connection()
-    cnx.close()
-    return "<p>Hello, World!</p>"
+    pass
 
 @app.route("/delete_sample", methods=["DELETE"])
 def delete_sample():
