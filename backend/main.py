@@ -63,6 +63,14 @@ def insert_sample():
 def update_sample():
     pass
 
+@app.route("/login", methods=["PUT"])
+def login():
+    pass
+
+@app.route("/register", methods=["PUT"])
+def register():
+    pass
+
 @app.route("/delete_sample", methods=["DELETE"])
 def delete_sample():
     data = request.args.get("id")
