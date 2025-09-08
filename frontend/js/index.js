@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarList = document.getElementById('sidebar').querySelector('ul');
     // for each item in json data from PHP
     samples.forEach(sample => {
+        console.log(sample)
         // Add a marker to the map
         const marker = L.marker([sample.latitude, sample.longitude]).bindPopup(`
             <p>Name: ${sample.name}</p>
@@ -39,14 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create a list element
         const li = document.createElement('li');
-
         // Make the name clickable, and add a sublist for details
         li.innerHTML = `
         <span class="clickable-name">${sample.name}</span>
+        <button class="details-button">Show Details</button>
         <ul>
             <li>Latitude: ${sample.latitude}</li>
             <li>Longitude: ${sample.longitude}</li>
+        </ul>
+        <ul class="hidden-list">
             <li>Rock Type: ${sample.rock_type}</li>
+            <li>Notes: ${sample.description}</li>
+            <li>Date Discovered: ${sample.date_discovered}</li>
+ 
         </ul>
         <button class="delete_button">Delete</button>
         `;
@@ -64,6 +70,24 @@ document.addEventListener('DOMContentLoaded', () => {
             map.setView([sample.latitude, sample.longitude], 10);
             marker.openPopup();
         });
+
+
+        // The sublist at index.html shows when clicked, or hides when already shown
+        const collapse_button = li.querySelector('.details-button');
+        const hidden_list = li.querySelector('.hidden-list');
+
+        collapse_button.addEventListener('click', () => {
+            
+            if (hidden_list.style.display === "block") {
+                hidden_list.style.display = "none";
+            } else {
+                hidden_list.style.display = "block";
+            }
+        })
+
+
+
+
         // Add the list item to the sidebar
         sidebarList.appendChild(li);
     });

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ironsand</title>
+     <!-- Stylesheet for the actual web page -->
+     <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+<body>
+    <header>
+        <h1>Ironsand</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="add_sample.html">Add Sample</a>
+            <a href="login.html">Log In</a>
+        </nav>
+    </header>
+    <form action="/php/login.php" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" name="password" required />
+        <button type="submit">Login</button>
+    </form>
+    <a href="register.html" id="register">Create Account</a>
+</body>
+
+</html>

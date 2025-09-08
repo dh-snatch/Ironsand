@@ -21,14 +21,13 @@
             <a href="login.html">Log In</a>
         </nav>
     </header>
-    <div id="sidebar">
-        <ul>
-            <h2>Samples</h2>
-            <!-- Populated by index.js -->
-        </ul>
-    </div>
-    <div id ="map">
-
+    <form action="/php/register.php" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" name="password" required />
+        <button type="submit">Sign Up</button>
+    </form>
     </div>
 </body>
  <!-- Leaflet.js script  -->
