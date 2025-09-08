@@ -1,5 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, url_for, redirect, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector, mysql.connector.pooling
+
+
+
+
+
+
 
 app = Flask(__name__)
 
@@ -63,13 +72,18 @@ def insert_sample():
 def update_sample():
     pass
 
-@app.route("/login", methods=["PUT"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     pass
 
-@app.route("/register", methods=["PUT"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     pass
+
+@app.route("/logout")
+def logout():
+    pass
+
 
 @app.route("/delete_sample", methods=["DELETE"])
 def delete_sample():
