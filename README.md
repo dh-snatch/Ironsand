@@ -19,5 +19,3 @@ user can be changed in the backend setup file.
 Backend-setup, database-setup, and frontend-setup are shell scripts to automate VM processes.
 To have additional python files run in the background, you can create a similar file to flask.service, cp it over to /etc/systemd/system/yourfilename, and start it with systemctl in backend-setup.sh.
 
-Sometimes the VM hangs and won't boot for a while, but opening the machine's GUI in virtual box seems to fix the problem. 
-For now, I have increased the timeout to 5 minutes in the vagrantfile so that the VM doesn't exit prematurely. 
